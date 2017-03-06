@@ -44,6 +44,7 @@ char* convert(char* s, int numRows) {
             }
         }
     }
+    free(c);
     return t;
 }
 
