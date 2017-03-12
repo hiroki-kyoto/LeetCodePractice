@@ -85,6 +85,7 @@ bool isMatch(char* s, char* p) {
 
     // begin match
     i = k = 0;
+	f = 1;
     while ( k<ef[1] || i<ns ) { // when regexp and str is both scaned completely
         if ( sf[k] ) { // if has delay
             // push this state
@@ -99,7 +100,8 @@ bool isMatch(char* s, char* p) {
             } else { // when not matched
                 // check if reach end
                 if ( ik[0] == ik[1] ) { // empty stack to regret steps
-                    return false;
+			f = 0;
+			break;
                 } else {
                     // regret
 		            if ( ( se[sk[ik[1]-1]] == '.' && s[si[ik[1]-1]] != 0 ) || 
@@ -117,5 +119,11 @@ bool isMatch(char* s, char* p) {
         }
     }
     
-    return true;
+	// memory cleaning job
+	free(si);
+	free(sk);
+	free(sf);
+	free(se);
+	
+    return f;
 }
